@@ -7,7 +7,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let mines = [];
 
     function initBoard() {
-        board = Array.from({ length: boardSize }, () => Array(boardSize).fill({ revealed: false, mine: false, flagged: false }));
+        board = Array.from({ length: boardSize }, () => 
+            Array.from({ length: boardSize }, () => ({ revealed: false, mine: false, flagged: false }))
+        );
         mines = [];
         placeMines();
         renderBoard();
@@ -43,7 +45,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     }
                 }
-                cellElement.addEventListener('click', () => handleCellClick(rowIndex, colIndex));
+                cellElement.addEventListener('click', handleCellClick.bind(null, rowIndex, colIndex));
                 gameBoard.appendChild(cellElement);
             });
         });
